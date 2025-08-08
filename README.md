@@ -36,16 +36,6 @@ https://sliding-puzzle-alghynna.netlify.app/
 2. **Mainkan game di sini:** [Klik untuk main](https://sliding-puzzle-alghynna.netlify.app/)
 
 ---
-# Screenshot
-
-1. Tampilan di desktop:
-![Tampilan Desktop](assets/screenshoot-desktop.png)
-2. Tambilan di HP:
-![Tampilan HP](assets/screenshoot-mobile.JPG)
-3. Berikut adalah tampilan ketika puzzle berhasil diselesaikan:
-![Tampilan Kemenangan](assets/screenshoot-win.png)
-
----
 # Author
 
 Alghynna – Capstone Project Hacktiv8  
