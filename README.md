@@ -33,7 +33,7 @@ https://sliding-puzzle-alghynna.netlify.app/
 1. Clone repository:
    ```bash
    git clone https://github.com/alghynna/sliding-puzzle.git
-2. **Mainkan game di sini:** [Klik untuk main](https://link-netlify-kamu.netlify.app](https://sliding-puzzle-alghynna.netlify.app/)
+2. **Mainkan game di sini:** [Klik untuk main](https://sliding-puzzle-alghynna.netlify.app/)
 
 ---
 # Author
