@@ -25,10 +25,10 @@ Penggunaan AI:
 - Netlify (untuk deployment)
 - IBM WatsonX (AI assistant)
 
-## 🚀 Live Demo
-👉 https://sliding-puzzle-alghynna.netlify.app/
+# Live Demo
+https://sliding-puzzle-alghynna.netlify.app/
 
-## 📁 Cara Menjalankan Project
+# Cara Menjalankan Project
 
 1. Clone repository:
    ```bash
@@ -36,8 +36,17 @@ Penggunaan AI:
 2. Buka file `index.html` di browser
 
 ---
+# Screenshot
 
-## 👩‍💻 Author
+1. Tampilan di desktop:
+![Tampilan Desktop](assets/screenshot-desktop.png)
+2. Tambilan di HP:
+![Tampilan HP](assets/screenshot-mobile.png)
+3. Berikut adalah tampilan ketika puzzle berhasil diselesaikan:
+![Tampilan Kemenangan](assets/screenshot-win.png)
+
+---
+# Author
 
 Alghynna – Capstone Project Hacktiv8  
 Dengan dukungan AI dari IBM WatsonX
