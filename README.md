@@ -32,7 +32,7 @@ Penggunaan AI:
 
 1. Clone repository:
    ```bash
-   git clone https://github.com/alghynna/siding-puzzle.git
+   git clone https://github.com/alghynna/sliding-puzzle.git
 2. Buka file `index.html` di browser
 
 ---
