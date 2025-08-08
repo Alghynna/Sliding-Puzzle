@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sliding Puzzle</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      font-size: 2.0em;
+      color: #2196f3;
+      font-weight: bold;
+      margin-bottom: 5px;
+      position: center;
+    }
+
+    p {
+      font-size: 1.0em;
+      text-align: center;
+      max-width: 600px;
+      margin: 5px 0 20px;
+    }
+
+    #reference {
+      top: 20px;
+      left: 20px;
+      width: 150px;
+      height: 150px;
+      border: 2px solid #ccc;
+      background-size: cover;
+      background-position: center;
+    }
+
+    #puzzle {
+      display: flex;
+      flex-wrap: wrap;
+      border: 2px solid #000;
+      width: 400px;
+      height: 400px;
+      margin: 20px 0;
+    }
+
+    .tile {
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      background-size: 400px 400px;
+    }
+
+    .empty {
+      background: white;
+      border: none;
+      cursor: default;
+    }
+
+    #controls {
+      margin-bottom: 10px;
+    }
+
+    #imageUploadContainer {
+      margin-bottom: 15px;
+    }
+
+    #timer,
+    #message,
+    #highscore {
+      margin: 5px;
+      font-size: 1.1em;
+    }
+
+    #message {
+      color: green;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .win {
+      color: #e91e63;
+      animation: pop 0.6s ease-out forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.4); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .credit {
+      font-size: 0.9em;
+      font-style: italic;
+      color: #666;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 500px) {
+      #puzzle {
+        transform: scale(0.85);
+        transform-origin: top center;
+      }
+      #reference {
+        width: 100px;
+        height: 100px;
+        top: 10px;
+        left: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>SLIDING PUZZLE</h2>
+  <p>Susunlah puzzle agar membentuk gambar yang utuh. Custom puzzle sesuai kreasimu. Selamat bermain!</p>
+
+  <div id="reference" title="Gambar Referensi"></div>
+
+  <div id="puzzle"></div>
+
+  <div id="controls">
+    <label for="sizeSelect">Ukuran Puzzle:</label>
+    <select id="sizeSelect" onchange="changeSize()">
+      <option value="3">3x3</option>
+      <option value="4" selected>4x4</option>
+      <option value="5">5x5</option>
+      <option value="6">6x6</option>
+    </select>
+    <button onclick="resetGame()">Ulangi Permainan</button>
+  </div>
+
+  <div id="imageUploadContainer">
+    <label for="imageUpload">Upload Gambar Puzzle:</label>
+    <input type="file" id="imageUpload" accept="image/*">
+  </div>
+
+  <div id="timer">Waktu: 0 detik</div>
+  <div id="message"></div>
+  <div id="highscore"></div>
+
+  <div class="credit">by Alghynna</div>
+
+<script>
+  const puzzle = document.getElementById('puzzle');
+  const message = document.getElementById('message');
+  const timerEl = document.getElementById('timer');
+  const highscoreEl = document.getElementById('highscore');
+  const reference = document.getElementById('reference');
+
+  let tiles = [];
+  let emptyIndex;
+  let timer, time = 0;
+  let size = 4;
+  let imageURL = 'https://onemarketindo.com/wp-content/uploads/2024/12/doraemon.jpg';
+
+  document.getElementById('imageUpload').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        imageURL = event.target.result;
+        reference.style.backgroundImage = `url('${imageURL}')`;
+        renderTiles();
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  function changeSize() {
+    size = parseInt(document.getElementById('sizeSelect').value);
+    resetGame();
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    time = 0;
+    timer = setInterval(() => {
+      time++;
+      timerEl.textContent = `Waktu: ${time} detik`;
+    }, 1000);
+  }
+
+  function stopTimer() {
+    clearInterval(timer);
+    const best = localStorage.getItem("highscore_" + size);
+    if (!best || time < best) {
+      localStorage.setItem("highscore_" + size, time);
+      highscoreEl.textContent = `🎉 Skor terbaik baru untuk ${size}x${size}: ${time} detik! 🎉`;
+    } else {
+      highscoreEl.textContent = `Skor terbaik: ${best} detik untuk ${size}x${size}`;
+    }
+  }
+
+  function createTiles() {
+    const total = size * size;
+    const numbers = [...Array(total - 1).keys()].map(n => n + 1);
+    for (let i = numbers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+    }
+
+    numbers.push(null);
+    tiles = [...numbers];
+    emptyIndex = tiles.indexOf(null);
+    renderTiles();
+  }
+
+  function renderTiles() {
+    puzzle.innerHTML = '';
+    const tileSize = 400 / size;
+
+    tiles.forEach((tile, i) => {
+      const div = document.createElement('div');
+      div.classList.add('tile');
+      div.style.width = `${tileSize}px`;
+      div.style.height = `${tileSize}px`;
+      div.dataset.index = i;
+
+      if (tile === null) {
+        div.classList.add('empty');
+        div.style.background = 'white';
+        div.style.border = 'none';
+      } else {
+        const x = (tile - 1) % size;
+        const y = Math.floor((tile - 1) / size);
+        div.style.backgroundImage = `url('${imageURL}')`;
+        div.style.backgroundPosition = `-${x * tileSize}px -${y * tileSize}px`;
+      }
+
+      div.addEventListener('click', () => handleMove(i));
+      puzzle.appendChild(div);
+    });
+  }
+
+  function handleMove(index) {
+    const x1 = index % size, y1 = Math.floor(index / size);
+    const x2 = emptyIndex % size, y2 = Math.floor(emptyIndex / size);
+
+    if (y1 === y2 && x1 !== x2) {
+      const dir = x1 < x2 ? 1 : -1;
+      for (let i = x2 - dir; i !== x1 - dir; i -= dir) {
+        const from = y1 * size + i;
+        const to = y1 * size + (i + dir);
+        [tiles[to], tiles[from]] = [tiles[from], tiles[to]];
+      }
+      emptyIndex = index;
+      renderTiles();
+      checkWin();
+    } else if (x1 === x2 && y1 !== y2) {
+      const dir = y1 < y2 ? 1 : -1;
+      for (let i = y2 - dir; i !== y1 - dir; i -= dir) {
+        const from = i * size + x1;
+        const to = (i + dir) * size + x1;
+        [tiles[to], tiles[from]] = [tiles[from], tiles[to]];
+      }
+      emptyIndex = index;
+      renderTiles();
+      checkWin();
+    }
+  }
+
+  function checkWin() {
+    for (let i = 0; i < tiles.length - 1; i++) {
+      if (tiles[i] !== i + 1) return;
+    }
+    stopTimer();
+    message.textContent = "🎉 Yay kelar!!! 🎉";
+  }
+
+  function resetGame() {
+    message.textContent = '';
+    highscoreEl.textContent = '';
+    startTimer();
+    createTiles();
+  }
+
+  window.onload = () => {
+    reference.style.backgroundImage = `url('${imageURL}')`;
+    resetGame();
+    const best = localStorage.getItem("highscore_" + size);
+    if (best) {
+      highscoreEl.textContent = `Skor terbaik: ${best} detik untuk ${size}x${size}`;
+    }
+  };
+</script>
+
+</body>
+</html>
