@@ -33,17 +33,17 @@ https://sliding-puzzle-alghynna.netlify.app/
 1. Clone repository:
    ```bash
    git clone https://github.com/alghynna/sliding-puzzle.git
-2. Buka file `index.html` di browser
+2. **Mainkan game di sini:** [Klik untuk main](https://link-netlify-kamu.netlify.app)
 
 ---
 # Screenshot
 
 1. Tampilan di desktop:
-![Tampilan Desktop](assets/screenshot-desktop.png)
+![Tampilan Desktop](assets/screenshoot-desktop.png)
 2. Tambilan di HP:
-![Tampilan HP](assets/screenshot-mobile.png)
+![Tampilan HP](assets/screenshoot-mobile.JPG)
 3. Berikut adalah tampilan ketika puzzle berhasil diselesaikan:
-![Tampilan Kemenangan](assets/screenshot-win.png)
+![Tampilan Kemenangan](assets/screenshoot-win.png)
 
 ---
 # Author
