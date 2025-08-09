@@ -32,7 +32,7 @@ https://urslizzle.netlify.app/
 
 1. Clone repository:
    ```bash
-   git clone https://github.com/alghynna/sliding-puzzle.git
+   git clone https://github.com/alghynna/URSLIZZLE.git
 2. **Mainkan game di sini:** [Klik untuk main](https://urslizzle.netlify.app/)
 
 ---
