@@ -2,7 +2,6 @@
 Puzzle geser berbasis web mini game berbasis web tempat pemain menyusun potongan puzzle menjadi gambar utuh yang dapat di-custom sesuka hati. Dibuat sebagai bagian dari Capstone Project dengan bantuan IBM WatsonX untuk mempercepat proses pengembangan.
 
 # Dibuat dengan Bantuan AI (IBM WatsonX)
-
 Penggunaan AI:
 - Membantu merancang logika game puzzle geser
 - Membuat dan menyempurnakan tampilan HTML + CSS
@@ -10,15 +9,13 @@ Penggunaan AI:
 - Memberi saran optimasi dan validasi fitur
 
 # Fitur
-
 - Upload gambar sendiri (custom puzzle)
-- Ukuran puzzle dinamis: 3x3 hingga 6x6
+- Ukuran puzzle dinamis: 2x2 hingga 9x9
 - Gameplay geser logis (horizontal/vertikal)
-- Timer dan highscore lokal
+- Timer, step, dan highscore lokal
 - Responsive di HP maupun desktop
 
 # Teknologi yang Digunakan
-
 - HTML5
 - CSS3
 - JavaScript
@@ -29,7 +26,6 @@ Penggunaan AI:
 https://urslizzle.netlify.app/
 
 # Cara Menjalankan Project
-
 1. Clone repository:
    ```bash
    git clone https://github.com/alghynna/URSLIZZLE.git
