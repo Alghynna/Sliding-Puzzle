@@ -1,4 +1,4 @@
-# My Sliding-Puzzle
+# URSLIZZLE
 Puzzle geser berbasis web mini game berbasis web tempat pemain menyusun potongan puzzle menjadi gambar utuh yang dapat di-custom sesuka hati. Dibuat sebagai bagian dari Capstone Project dengan bantuan IBM WatsonX untuk mempercepat proses pengembangan.
 
 # Dibuat dengan Bantuan AI (IBM WatsonX)
@@ -26,14 +26,14 @@ Penggunaan AI:
 - IBM WatsonX (AI assistant)
 
 # Live Demo
-https://my-sliding-puzzle-alghynna.netlify.app/
+https://urslizzle.netlify.app/
 
 # Cara Menjalankan Project
 
 1. Clone repository:
    ```bash
    git clone https://github.com/alghynna/sliding-puzzle.git
-2. **Mainkan game di sini:** [Klik untuk main](https://my-sliding-puzzle-alghynna.netlify.app/)
+2. **Mainkan game di sini:** [Klik untuk main](https://urslizzle.netlify.app/)
 
 ---
 # Author
